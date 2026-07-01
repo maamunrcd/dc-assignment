@@ -1,0 +1,48 @@
+{
+  "sectionTitle": "Our leading-edge solutions are designed to transform how you build",
+  "sectionDescription": "From intelligent automation to performance-first infrastructure, METATECH delivers end-to-end capabilities that help teams ship faster without compromising quality.",
+  "categories": ["All", "Software", "Hardware"],
+  "features": [
+    {
+      "id": "01",
+      "number": "01",
+      "title": "Smart Efficiency & Innovation",
+      "description": "Streamline operations with AI-driven workflows that reduce manual effort, improve decision quality, and unlock new product opportunities across your organization.",
+      "category": "Software",
+      "ctaLabel": "Learn More"
+    },
+    {
+      "id": "02",
+      "number": "02",
+      "title": "Edge Compute Infrastructure",
+      "description": "Deploy low-latency hardware stacks optimized for real-time inference and distributed workloads at the edge.",
+      "category": "Hardware",
+      "ctaLabel": "Learn More"
+    },
+    {
+      "id": "03",
+      "number": "03",
+      "title": "Predictive Analytics Core",
+      "description": "Turn complex data streams into actionable forecasts with models tuned for your domain and compliance requirements.",
+      "category": "Software",
+      "ctaLabel": "Learn More"
+    }
+  ],
+  "highlightCards": [
+    {
+      "id": "card-1",
+      "title": "AI-driven insights",
+      "description": "Surface patterns and opportunities hidden in your data with explainable, production-ready models."
+    },
+    {
+      "id": "card-2",
+      "title": "World-class tech stack",
+      "description": "Built on modern cloud-native architecture with security, observability, and scale baked in from day one."
+    },
+    {
+      "id": "card-3",
+      "title": "Performance-oriented",
+      "description": "Engineered for speed and reliability so your teams and customers experience seamless interactions."
+    }
+  ]
+}

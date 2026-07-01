@@ -1,0 +1,40 @@
+{
+  "heroTitle": "Building Intelligence To Power Scalable Innovation",
+  "heroTitleHighlight": ["Intelligence", "Scalable Innovation"],
+  "heroDescription": "We help forward-thinking companies harness AI and cutting-edge technology to build products that scale with confidence, clarity, and measurable impact.",
+  "heroCta": {
+    "primary": "Get Started",
+    "secondary": "Watch Video"
+  },
+  "heroBackgroundImage": "/images/hero-bg.svg",
+  "productHighlight": {
+    "title": "An AI-powered credibility checking platform",
+    "description": "Verify claims, sources, and narratives in real time with enterprise-grade accuracy. Built for teams that need trust at scale.",
+    "ctaLabel": "Learn More",
+    "image": "/images/product-tablet.svg"
+  },
+  "footer": {
+    "products": [
+      { "label": "AI Platform", "href": "#" },
+      { "label": "Credibility Engine", "href": "#" },
+      { "label": "Analytics Suite", "href": "#" },
+      { "label": "Integrations", "href": "#" }
+    ],
+    "company": [
+      { "label": "About Us", "href": "#about" },
+      { "label": "Careers", "href": "#" },
+      { "label": "Blog", "href": "#" },
+      { "label": "Contact", "href": "#contact" }
+    ],
+    "socials": [
+      { "label": "LinkedIn", "href": "https://linkedin.com", "icon": "linkedin" },
+      { "label": "Twitter", "href": "https://twitter.com", "icon": "twitter" },
+      { "label": "GitHub", "href": "https://github.com", "icon": "github" }
+    ],
+    "legal": [
+      { "label": "Privacy Policy", "href": "#" },
+      { "label": "Terms of Service", "href": "#" }
+    ],
+    "copyright": "© 2026 METATECH. All rights reserved."
+  }
+}

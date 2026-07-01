@@ -1,0 +1,25 @@
+{
+  "mediaLogos": [
+    { "id": "nyt", "name": "The New York Times", "logo": "/images/logos/nyt.svg" },
+    { "id": "forbes", "name": "Forbes", "logo": "/images/logos/forbes.svg" },
+    { "id": "techcrunch", "name": "TechCrunch", "logo": "/images/logos/techcrunch.svg" },
+    { "id": "wired", "name": "Wired", "logo": "/images/logos/wired.svg" },
+    { "id": "bloomberg", "name": "Bloomberg", "logo": "/images/logos/bloomberg.svg" },
+    { "id": "verge", "name": "The Verge", "logo": "/images/logos/verge.svg" }
+  ],
+  "trustedLogos": [
+    { "id": "slack", "name": "Slack", "logo": "/images/logos/slack.svg" },
+    { "id": "google", "name": "Google", "logo": "/images/logos/google.svg" },
+    { "id": "amazon", "name": "Amazon", "logo": "/images/logos/amazon.svg" },
+    { "id": "microsoft", "name": "Microsoft", "logo": "/images/logos/microsoft.svg" },
+    { "id": "spotify", "name": "Spotify", "logo": "/images/logos/spotify.svg" },
+    { "id": "stripe", "name": "Stripe", "logo": "/images/logos/stripe.svg" },
+    { "id": "notion", "name": "Notion", "logo": "/images/logos/notion.svg" },
+    { "id": "figma", "name": "Figma", "logo": "/images/logos/figma.svg" },
+    { "id": "airbnb", "name": "Airbnb", "logo": "/images/logos/airbnb.svg" },
+    { "id": "netflix", "name": "Netflix", "logo": "/images/logos/netflix.svg" },
+    { "id": "uber", "name": "Uber", "logo": "/images/logos/uber.svg" },
+    { "id": "shopify", "name": "Shopify", "logo": "/images/logos/shopify.svg" }
+  ],
+  "trustedHeading": "Trusted by leading companies"
+}
