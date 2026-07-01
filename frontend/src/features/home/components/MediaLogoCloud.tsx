@@ -21,7 +21,7 @@ export const MediaLogoCloud = ({ logos }: MediaLogoCloudProps) => (
             src={logo.logo}
             alt={logo.name}
             loading="lazy"
-            className="h-8 w-auto max-w-[120px] object-contain opacity-70"
+            className="h-8 w-auto max-w-[120px] object-contain opacity-70 brightness-0 invert"
           />
         </div>
       ))}
