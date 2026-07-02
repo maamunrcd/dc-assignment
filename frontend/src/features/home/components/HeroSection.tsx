@@ -11,7 +11,7 @@ interface HeroSectionProps {
 }
 
 export const HeroSection = ({ data }: HeroSectionProps) => (
-  <SectionContainer id="home" className="pt-10 pb-6 sm:pt-14 sm:pb-10 lg:pt-20">
+  <SectionContainer id="home" className="pt-6 pb-6 sm:pt-8 sm:pb-10 lg:pt-10">
     <div className="grid items-start gap-8 lg:grid-cols-2 lg:gap-16">
       <div>
         <h1 className="max-w-xl text-[2rem] font-bold leading-[1.1] tracking-tight text-white sm:text-5xl lg:text-[3.25rem] lg:leading-[1.08]">

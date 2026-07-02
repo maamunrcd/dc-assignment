@@ -12,7 +12,7 @@ interface MainLayoutProps {
 export const MainLayout = ({ children, footer }: MainLayoutProps) => (
   <div className="flex min-h-screen flex-col">
     <Header />
-    <main className="flex-1">{children}</main>
+    <main className="flex-1 pt-16 sm:pt-[4.5rem]">{children}</main>
     {footer ? <Footer footer={footer} /> : null}
   </div>
 );

@@ -1,6 +1,6 @@
 export const HeroSkeleton = () => (
   <div className="animate-pulse px-4 sm:px-6 lg:px-8" aria-hidden="true">
-    <div className="mx-auto max-w-7xl pt-10 pb-6 lg:pt-20">
+    <div className="mx-auto max-w-7xl pt-6 pb-6 sm:pt-8 lg:pt-10">
       <div className="grid gap-8 lg:grid-cols-2">
         <div className="space-y-4">
           <div className="h-10 w-full max-w-lg rounded-lg bg-white/10 sm:h-12" />
