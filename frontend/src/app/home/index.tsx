@@ -10,6 +10,7 @@ import { ProductHighlight } from '@/features/home/components/ProductHighlight';
 import { TrustedBySection } from '@/features/home/components/TrustedBySection';
 
 import { ErrorMessage } from '@/components/Atoms/ErrorMessage';
+import { HeroSkeleton } from '@/components/Atoms/HeroSkeleton';
 import { SectionSkeleton } from '@/components/Atoms/SectionSkeleton';
 import { MainLayout } from '@/components/Layout/MainLayout';
 
@@ -28,22 +29,11 @@ const HomePage = () => {
   const featuresQuery = useFeaturesQuery();
   const partnersQuery = usePartnersQuery();
 
-  const isInitialLoading =
-    homeQuery.isLoading || featuresQuery.isLoading || partnersQuery.isLoading;
-
-  if (isInitialLoading) {
-    return (
-      <MainLayout>
-        <div className="mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8">
-          <SectionSkeleton lines={5} />
-        </div>
-      </MainLayout>
-    );
-  }
-
   return (
     <MainLayout footer={homeQuery.data?.footer}>
-      {homeQuery.isError ? (
+      {homeQuery.isLoading ? (
+        <HeroSkeleton />
+      ) : homeQuery.isError ? (
         <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
           <ErrorMessage
             message={getErrorMessage(
@@ -57,7 +47,11 @@ const HomePage = () => {
         <HeroSection data={homeQuery.data} />
       ) : null}
 
-      {partnersQuery.isError ? (
+      {partnersQuery.isLoading ? (
+        <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+          <SectionSkeleton lines={2} />
+        </div>
+      ) : partnersQuery.isError ? (
         <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
           <ErrorMessage
             message="Failed to load partner logos."
@@ -68,7 +62,11 @@ const HomePage = () => {
         <MediaLogoCloud logos={partnersQuery.data.mediaLogos} />
       ) : null}
 
-      {featuresQuery.isError ? (
+      {featuresQuery.isLoading ? (
+        <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+          <SectionSkeleton lines={6} />
+        </div>
+      ) : featuresQuery.isError ? (
         <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
           <ErrorMessage
             message="Failed to load features."

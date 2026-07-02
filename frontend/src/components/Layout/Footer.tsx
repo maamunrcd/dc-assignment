@@ -7,7 +7,8 @@ interface FooterProps {
 
 const SocialIcon = ({ icon }: { icon: string }) => {
   const paths: Record<string, string> = {
-    linkedin: 'M4.98 3.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM3.5 8h3v8h-3V8zm5 0h2.9v1.1h.04c.4-.8 1.4-1.6 2.9-1.6 3.1 0 3.7 2 3.7 4.6V16h-3v-4.2c0-1 0-2.3-1.4-2.3-1.4 0-1.6 1.1-1.6 2.2V16h-3V8z',
+    linkedin:
+      'M4.98 3.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM3.5 8h3v8h-3V8zm5 0h2.9v1.1h.04c.4-.8 1.4-1.6 2.9-1.6 3.1 0 3.7 2 3.7 4.6V16h-3v-4.2c0-1 0-2.3-1.4-2.3-1.4 0-1.6 1.1-1.6 2.2V16h-3V8z',
     twitter:
       'M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z',
     github:
@@ -15,7 +16,7 @@ const SocialIcon = ({ icon }: { icon: string }) => {
   };
 
   return (
-    <svg viewBox="0 0 24 24" className="h-5 w-5 fill-current" aria-hidden="true">
+    <svg viewBox="0 0 24 24" className="h-4 w-4 fill-current" aria-hidden="true">
       <path d={paths[icon] || paths.github} />
     </svg>
   );
@@ -29,15 +30,15 @@ const FooterColumn = ({
   links: { label: string; href: string }[];
 }) => (
   <div>
-    <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-white">
+    <h3 className="mb-4 text-xs font-bold uppercase tracking-[0.15em] text-white/90">
       {title}
     </h3>
-    <ul className="space-y-2">
+    <ul className="space-y-2.5">
       {links.map((link) => (
         <li key={link.label}>
           <a
             href={link.href}
-            className="text-sm text-white/60 transition hover:text-accent"
+            className="text-sm text-white/50 transition hover:text-accent"
           >
             {link.label}
           </a>
@@ -48,30 +49,35 @@ const FooterColumn = ({
 );
 
 export const Footer = ({ footer }: FooterProps) => (
-  <footer id="contact" className="bg-primary-dark pt-16">
-    <div className="relative overflow-hidden px-4 pb-8 sm:px-6 lg:px-8">
+  <footer id="contact" className="bg-primary-dark pt-12 sm:pt-16">
+    <div className="relative overflow-hidden">
       <div
-        className="pointer-events-none select-none bg-gradient-to-b from-accent/30 to-transparent bg-clip-text text-center text-6xl font-extrabold tracking-tight text-transparent sm:text-8xl lg:text-[10rem]"
+        className="pointer-events-none select-none px-4 text-center text-[3.5rem] font-black uppercase leading-none tracking-tight text-transparent sm:text-7xl lg:text-[9rem]"
         aria-hidden="true"
+        style={{
+          background: 'linear-gradient(180deg, rgba(0,255,65,0.35) 0%, rgba(0,255,65,0.05) 60%, transparent 100%)',
+          WebkitBackgroundClip: 'text',
+          backgroundClip: 'text',
+        }}
       >
         {BRAND_NAME}
       </div>
 
-      <div className="mx-auto mt-10 grid max-w-7xl gap-10 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="relative mx-auto grid max-w-7xl gap-10 px-4 py-10 sm:grid-cols-2 sm:px-6 lg:grid-cols-4 lg:px-8">
         <FooterColumn title="Products" links={footer.products} />
         <FooterColumn title="Company" links={footer.company} />
         <div>
-          <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-white">
+          <h3 className="mb-4 text-xs font-bold uppercase tracking-[0.15em] text-white/90">
             Socials
           </h3>
-          <ul className="space-y-3">
+          <ul className="space-y-2.5">
             {footer.socials.map((social) => (
               <li key={social.label}>
                 <a
                   href={social.href}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center gap-2 text-sm text-white/60 transition hover:text-accent"
+                  className="inline-flex items-center gap-2 text-sm text-white/50 transition hover:text-accent"
                 >
                   <SocialIcon icon={social.icon} />
                   {social.label}
@@ -82,7 +88,7 @@ export const Footer = ({ footer }: FooterProps) => (
         </div>
       </div>
 
-      <div className="mx-auto mt-12 flex max-w-7xl flex-col items-center justify-between gap-4 border-t border-white/10 pt-6 text-sm text-white/50 sm:flex-row">
+      <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 border-t border-white/8 px-4 py-6 text-xs text-white/40 sm:flex-row sm:px-6 lg:px-8">
         <p>{footer.copyright}</p>
         <div className="flex gap-6">
           {footer.legal.map((link) => (

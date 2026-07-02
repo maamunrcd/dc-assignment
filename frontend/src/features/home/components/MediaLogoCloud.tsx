@@ -1,5 +1,6 @@
 import type { PartnerLogo } from '@/features/home/types';
 
+import { LogoTile } from '@/components/Atoms/LogoTile';
 import { SectionContainer } from '@/components/Atoms/SectionContainer';
 
 interface MediaLogoCloudProps {
@@ -7,23 +8,13 @@ interface MediaLogoCloudProps {
 }
 
 export const MediaLogoCloud = ({ logos }: MediaLogoCloudProps) => (
-  <SectionContainer className="py-10 sm:py-14">
+  <SectionContainer className="border-y border-white/5 py-8 sm:py-12">
     <div
-      className="flex gap-8 overflow-x-auto pb-2 [-ms-overflow-style:none] [scrollbar-width:none] sm:grid sm:grid-cols-3 sm:gap-6 sm:overflow-visible lg:grid-cols-6 [&::-webkit-scrollbar]:hidden"
+      className="flex items-center justify-between gap-6 overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] sm:gap-8 lg:grid lg:grid-cols-6 lg:overflow-visible [&::-webkit-scrollbar]:hidden"
       aria-label="Featured in media"
     >
       {logos.map((logo) => (
-        <div
-          key={logo.id}
-          className="flex min-w-[140px] shrink-0 items-center justify-center rounded-xl border border-white/5 bg-white/5 px-4 py-5 grayscale transition hover:grayscale-0 sm:min-w-0"
-        >
-          <img
-            src={logo.logo}
-            alt={logo.name}
-            loading="lazy"
-            className="h-8 w-auto max-w-[120px] object-contain opacity-70 brightness-0 invert"
-          />
-        </div>
+        <LogoTile key={logo.id} logo={logo} variant="media" />
       ))}
     </div>
   </SectionContainer>
