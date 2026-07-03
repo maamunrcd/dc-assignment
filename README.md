@@ -235,6 +235,35 @@ Set `VITE_BACKEND_API_URL` when deploying the frontend separately from the API.
 
 ---
 
+## Deploy to Vercel
+
+This project is configured for **full-stack deployment on Vercel**: the Vite frontend is served as static files and the Express API runs as a serverless function at `/api/*`.
+
+### Steps
+
+1. Go to [vercel.com/new](https://vercel.com/new) and import `maamunrcd/dc-assignment`.
+2. **Root Directory:** leave as `./` (repository root).
+3. **Framework Preset:** Other (Vercel reads settings from `vercel.json`).
+4. **Environment Variables:** none required — the frontend calls `/api` on the same domain.
+5. Click **Deploy**.
+
+### How it works
+
+| Path | Handler |
+|------|---------|
+| `/`, `/index.html` | Vite build (`frontend/dist`) |
+| `/api/home`, `/api/site`, `/api/sections/*` | Express app (`api/index.ts`) |
+| `/health` | Express health check |
+
+### Local preview (optional)
+
+```bash
+npm i -g vercel
+vercel dev
+```
+
+---
+
 ## Assumptions
 
 1. **Static JSON content** — No database or authentication; content is managed in `backend/src/data/*.json`.
@@ -250,7 +279,7 @@ Set `VITE_BACKEND_API_URL` when deploying the frontend separately from the API.
 
 ## Future Improvements
 
-- [ ] Deploy frontend (Vercel/Netlify) and backend (Railway/Render/Fly.io)
+- [x] Deploy to Vercel (frontend + API serverless function)
 - [ ] Add unit/integration tests (Vitest + React Testing Library)
 - [ ] Open Graph tags, Twitter cards, and JSON-LD structured data
 - [ ] Scroll-triggered animations (Framer Motion or CSS `@keyframes`)
@@ -271,7 +300,7 @@ Set `VITE_BACKEND_API_URL` when deploying the frontend separately from the API.
 | Basic SEO | ✅ `lang`, title, meta description, semantic landmarks |
 | Animations & transitions | ✅ Skeleton pulse, hover states, tab transitions |
 | Unit tests | ❌ Not implemented |
-| Deployed application | ❌ Not deployed (ready for Vercel + Render) |
+| Deployed application | ✅ Vercel-ready (`vercel.json` + `api/index.ts`) |
 
 ---
 

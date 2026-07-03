@@ -1,0 +1,7 @@
+react-boilerplate-ts
+frontend/dist
+backend/dist
+node_modules
+*.zip
+frontend/public/Web View*.png
+frontend/public/12.png
