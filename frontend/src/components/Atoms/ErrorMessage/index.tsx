@@ -1,25 +1,43 @@
+import { Button } from '@/components/Atoms/Button';
+import { cn } from '@/lib/utils/cn';
+
+type ErrorMessageVariant = 'dark' | 'light';
+
 interface ErrorMessageProps {
   message?: string;
   onRetry?: () => void;
+  variant?: ErrorMessageVariant;
 }
 
+const variantStyles: Record<ErrorMessageVariant, { container: string; text: string }> =
+  {
+    dark: {
+      container: 'border-red-500/30 bg-red-500/10',
+      text: 'text-red-200',
+    },
+    light: {
+      container: 'border-red-500/20 bg-red-50',
+      text: 'text-red-700',
+    },
+  };
+
 export const ErrorMessage = ({
-  message = 'Failed to load content.',
+  message = 'Something went wrong while loading this section.',
   onRetry,
+  variant = 'dark',
 }: ErrorMessageProps) => (
   <div
-    className="rounded-2xl border border-red-500/30 bg-red-500/10 p-6 text-center"
+    className={cn(
+      'rounded-2xl border p-6 text-center',
+      variantStyles[variant].container
+    )}
     role="alert"
   >
-    <p className="text-sm text-red-200 sm:text-base">{message}</p>
-    {onRetry ? (
-      <button
-        type="button"
-        onClick={onRetry}
-        className="mt-4 rounded-full border border-red-300/40 px-5 py-2 text-sm font-medium text-red-100 transition hover:bg-red-500/20"
-      >
+    <p className={cn('text-sm', variantStyles[variant].text)}>{message}</p>
+    {onRetry && (
+      <Button variant="outline" className="mt-4" onClick={onRetry}>
         Try again
-      </button>
-    ) : null}
+      </Button>
+    )}
   </div>
 );

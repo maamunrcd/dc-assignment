@@ -1,0 +1,53 @@
+{
+  "footer": {
+    "copyright": {
+      "startYear": 2022,
+      "endYear": 2026,
+      "companyName": "MetaTech LLC",
+      "rightsText": "All Rights Reserved"
+    },
+    "legal": [
+      {
+        "id": "terms-of-use",
+        "order": 1,
+        "label": "Terms of Use",
+        "href": "#"
+      },
+      {
+        "id": "privacy-policy",
+        "order": 2,
+        "label": "Privacy Policy",
+        "href": "#"
+      }
+    ],
+    "socials": [
+      {
+        "id": "facebook",
+        "order": 1,
+        "label": "Facebook",
+        "href": "https://facebook.com"
+      },
+      {
+        "id": "linkedin",
+        "order": 2,
+        "label": "Linkedin",
+        "href": "https://linkedin.com"
+      },
+      {
+        "id": "instagram",
+        "order": 3,
+        "label": "Instagram",
+        "href": "https://instagram.com"
+      },
+      {
+        "id": "youtube",
+        "order": 4,
+        "label": "Youtube",
+        "href": "https://youtube.com"
+      }
+    ],
+    "brandBanner": {
+      "imageUrl": "/footer-bg.png"
+    }
+  }
+}

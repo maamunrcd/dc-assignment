@@ -1,34 +1,131 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Manrope:wght@400;500;600;700&display=swap');
 @import 'tailwindcss';
 
 @theme {
   --color-primary-dark: #001a11;
-  --color-primary: #002818;
+  --color-primary: #003d28;
   --color-accent: #00ff41;
-  --color-accent-hover: #00e63a;
+  --color-accent-dim: #00cc34;
   --color-surface: #f5f5f5;
-  --color-muted: #8a8a8a;
-  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --color-muted: #a3a3a3;
+  --font-sans: 'Bricolage Grotesque', system-ui, sans-serif;
+  --font-nav: 'Manrope', system-ui, sans-serif;
 }
 
 @layer base {
   html {
     scroll-behavior: smooth;
-    -webkit-text-size-adjust: 100%;
   }
 
   body {
-    @apply m-0 min-h-screen bg-primary-dark font-sans text-white antialiased;
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+    @apply m-0 bg-primary-dark font-sans text-white antialiased;
   }
 
   #root {
     @apply min-h-screen;
   }
+}
 
-  img {
-    @apply max-w-full;
+.product-highlight-section {
+  background-color: #17a955;
+  background-image: url('/highlight.svg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.product-highlight-slider {
+  position: relative;
+}
+
+.product-highlight-slider .slick-list,
+.product-highlight-slider .slick-track,
+.product-highlight-slider .slick-slide > div {
+  height: 100%;
+}
+
+.product-highlight-slider .slick-dots {
+  position: absolute;
+  bottom: 28px;
+  left: 28px;
+  z-index: 10;
+  display: flex !important;
+  width: auto;
+  transform: none;
+  gap: 10px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.product-highlight-slider .slick-dots li {
+  width: auto;
+  height: auto;
+  margin: 0;
+}
+
+.product-highlight-slider .slick-dots li button {
+  width: 10px;
+  height: 6px;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.45);
+  font-size: 0;
+  line-height: 0;
+  transition:
+    width 0.25s ease,
+    background-color 0.25s ease;
+}
+
+.product-highlight-slider .slick-dots li button::before {
+  display: none;
+}
+
+.product-highlight-slider .slick-dots li.slick-active button {
+  width: 36px;
+  background: #ffffff;
+}
+
+@keyframes tech-marquee-left {
+  from {
+    transform: translateX(0);
   }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes tech-marquee-right {
+  from {
+    transform: translateX(-50%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
+
+.tech-marquee-left {
+  animation: tech-marquee-left 45s linear infinite;
+}
+
+.tech-marquee-right {
+  animation: tech-marquee-right 45s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tech-marquee-left,
+  .tech-marquee-right {
+    animation: none;
+    transform: none;
+  }
+}
+
+.footer-brand-bg {
+  aspect-ratio: 1440 / 227;
+  background-size: 100% auto;
+  background-position: bottom center;
+  background-repeat: no-repeat;
 }

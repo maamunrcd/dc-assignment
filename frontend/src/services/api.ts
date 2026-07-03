@@ -2,26 +2,31 @@ import axios from 'axios';
 
 const baseURL = import.meta.env.VITE_BACKEND_API_URL || '';
 
-export const apiClient = axios.create({
+export const publicAxiosInstance = axios.create({
   baseURL,
+  timeout: 15_000,
   headers: {
-    'Content-Type': 'application/json',
+    Accept: 'application/json',
   },
 });
 
-apiClient.interceptors.response.use(
+publicAxiosInstance.interceptors.response.use(
   (response) => response,
-  (error) => {
-    if (!error.response) {
-      return Promise.reject({
-        message: 'No response received from the server. Please try again.',
-      });
+  (error: unknown) => {
+    if (!axios.isAxiosError(error) || !error.response) {
+      return Promise.reject(
+        new Error('Unable to reach the server. Check your connection and try again.')
+      );
     }
 
     const message =
-      error.response.data?.message ||
-      'Something went wrong while fetching data.';
+      typeof error.response.data === 'object' &&
+      error.response.data !== null &&
+      'message' in error.response.data &&
+      typeof error.response.data.message === 'string'
+        ? error.response.data.message
+        : 'The server returned an unexpected error.';
 
-    return Promise.reject({ message, status: error.response.status });
+    return Promise.reject(new Error(message));
   }
 );

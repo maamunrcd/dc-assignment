@@ -4,4 +4,15 @@ dist
 .env.local
 *.log
 .DS_Store
+
+# Reference boilerplate (not part of this project)
 react-boilerplate-ts/
+
+# Build artifacts & archives
+frontend/dist/
+backend/dist/
+*.zip
+
+# Design reference exports (not needed at runtime)
+frontend/public/Web View*.png
+frontend/public/12.png

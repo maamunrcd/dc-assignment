@@ -1,10 +1,13 @@
+import { ErrorBoundary } from '@/components/ErrorBoundary';
 import { AppProviders } from '@/components/Providers/AppProviders';
-import { AppRoutes } from '@/routes';
+import { BaseRoutes } from '@/routes';
 
 function App() {
   return (
     <AppProviders>
-      <AppRoutes />
+      <ErrorBoundary>
+        <BaseRoutes />
+      </ErrorBoundary>
     </AppProviders>
   );
 }

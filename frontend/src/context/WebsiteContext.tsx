@@ -7,23 +7,15 @@ import {
   type ReactNode,
 } from 'react';
 
-import type { FeatureCategory } from '@/lib/config/constants';
-
 interface WebsiteContextValue {
-  activeFeatureCategory: FeatureCategory;
-  setActiveFeatureCategory: (category: FeatureCategory) => void;
   isMobileMenuOpen: boolean;
   toggleMobileMenu: () => void;
   closeMobileMenu: () => void;
 }
 
-const WebsiteContext = createContext<WebsiteContextValue | undefined>(
-  undefined
-);
+const WebsiteContext = createContext<WebsiteContextValue | null>(null);
 
 export const WebsiteProvider = ({ children }: { children: ReactNode }) => {
-  const [activeFeatureCategory, setActiveFeatureCategory] =
-    useState<FeatureCategory>('All');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const toggleMobileMenu = useCallback(() => {
@@ -36,18 +28,11 @@ export const WebsiteProvider = ({ children }: { children: ReactNode }) => {
 
   const value = useMemo(
     () => ({
-      activeFeatureCategory,
-      setActiveFeatureCategory,
       isMobileMenuOpen,
       toggleMobileMenu,
       closeMobileMenu,
     }),
-    [
-      activeFeatureCategory,
-      isMobileMenuOpen,
-      toggleMobileMenu,
-      closeMobileMenu,
-    ]
+    [isMobileMenuOpen, toggleMobileMenu, closeMobileMenu]
   );
 
   return (

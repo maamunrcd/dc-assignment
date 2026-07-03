@@ -1,20 +1,22 @@
-import type { ReactNode } from 'react';
+import { cn } from '@/lib/utils/cn';
 
 interface SectionContainerProps {
-  id?: string;
-  children: ReactNode;
+  children: React.ReactNode;
   className?: string;
+  id?: string;
+  as?: 'section' | 'div';
 }
 
 export const SectionContainer = ({
-  id,
   children,
-  className = '',
+  className,
+  id,
+  as: Component = 'section',
 }: SectionContainerProps) => (
-  <section
+  <Component
     id={id}
-    className={`mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 ${className}`}
+    className={cn('mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8', className)}
   >
     {children}
-  </section>
+  </Component>
 );

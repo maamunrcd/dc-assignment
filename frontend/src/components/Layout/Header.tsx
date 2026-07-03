@@ -1,91 +1,89 @@
+import { X } from 'lucide-react';
+import { Link } from '@/components/Atoms/Link';
 import { useWebsiteContext } from '@/context/WebsiteContext';
-import { HEADER_CTA, NAV_LINKS } from '@/lib/config/constants';
-import { useScrolled } from '@/hooks/useScrolled';
-
-import { Button } from '@/components/Atoms/Button';
-import { Logo } from '@/components/Atoms/Logo';
-import { NavLink } from '@/components/Atoms/NavLink';
+import { NAV_LINKS } from '@/lib/config/navigation';
+import { cn } from '@/lib/utils/cn';
 
 export const Header = () => {
   const { isMobileMenuOpen, toggleMobileMenu, closeMobileMenu } =
     useWebsiteContext();
-  const isScrolled = useScrolled();
 
   return (
-    <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
-        isScrolled || isMobileMenuOpen
-          ? 'border-b border-white/8 bg-primary-dark/90 shadow-[0_8px_32px_rgba(0,0,0,0.35)] backdrop-blur-xl'
-          : 'border-b border-transparent bg-primary-dark/40 backdrop-blur-sm'
-      }`}
-    >
-      <div className="relative mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:h-[4.5rem] sm:px-6 lg:px-10">
-        <Logo onClick={closeMobileMenu} />
+    <header className="sticky top-0 z-50 pt-4 sm:pt-5">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-[1fr_auto_1fr] items-center rounded-[22px] border border-white/10 bg-white/18 px-[20px] py-[15px] shadow-[0_10px_30px_rgba(0,0,0,0.2)] backdrop-blur-md">
+          <Link
+            href="#home"
+            variant="unstyled"
+            className="justify-self-start"
+            onClick={closeMobileMenu}
+          >
+            <img src="/logo.svg" alt="METATECH" className="h-6 w-auto" />
+          </Link>
 
-        <nav
-          className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-8 md:flex lg:gap-10"
-          aria-label="Main navigation"
-        >
-          {NAV_LINKS.map((link) => (
-            <NavLink key={link.href} href={link.href} label={link.label} />
-          ))}
-        </nav>
-
-        <div className="hidden md:block">
-          <Button className="h-11 px-6 py-0 text-sm font-semibold">
-            {HEADER_CTA}
-          </Button>
-        </div>
-
-        <button
-          type="button"
-          className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-white/15 text-white md:hidden"
-          aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
-          aria-expanded={isMobileMenuOpen}
-          onClick={toggleMobileMenu}
-        >
-          <span className="sr-only">Toggle menu</span>
-          <div className="relative h-3.5 w-5">
-            <span
-              className={`absolute left-0 block h-0.5 w-5 bg-white transition-all duration-200 ${isMobileMenuOpen ? 'top-1.5 rotate-45' : 'top-0'}`}
-            />
-            <span
-              className={`absolute left-0 top-1.5 block h-0.5 w-5 bg-white transition-all duration-200 ${isMobileMenuOpen ? 'opacity-0' : 'opacity-100'}`}
-            />
-            <span
-              className={`absolute left-0 block h-0.5 w-5 bg-white transition-all duration-200 ${isMobileMenuOpen ? 'top-1.5 -rotate-45' : 'top-3'}`}
-            />
-          </div>
-        </button>
-      </div>
-
-      <div
-        className={`overflow-hidden transition-all duration-300 md:hidden ${
-          isMobileMenuOpen ? 'max-h-96 border-t border-white/8' : 'max-h-0'
-        }`}
-      >
-        <nav
-          className="bg-primary-dark/95 px-4 py-4"
-          aria-label="Mobile navigation"
-        >
-          <ul className="space-y-1">
+          <nav
+            className="font-nav hidden items-center justify-center gap-8 md:flex lg:gap-10"
+            aria-label="Main navigation"
+          >
             {NAV_LINKS.map((link) => (
-              <li key={link.href}>
-                <a
-                  href={link.href}
-                  className="block rounded-lg px-3 py-3 text-base font-medium text-white/85 transition hover:bg-white/5 hover:text-white"
-                  onClick={closeMobileMenu}
-                >
-                  {link.label}
-                </a>
-              </li>
+              <Link key={link.href} href={link.href} variant="nav">
+                {link.label}
+              </Link>
             ))}
-            <li className="pt-3">
-              <Button className="h-11 w-full">{HEADER_CTA}</Button>
-            </li>
-          </ul>
-        </nav>
+          </nav>
+
+          <div className="font-nav hidden justify-self-end md:block">
+            <Link href="#contact" variant="glass">
+              Book a meeting
+            </Link>
+          </div>
+
+          <button
+            type="button"
+            className="col-start-3 flex justify-self-end rounded-lg p-2 text-white md:hidden"
+            onClick={toggleMobileMenu}
+            aria-expanded={isMobileMenuOpen}
+            aria-label="Toggle menu"
+          >
+            {isMobileMenuOpen ? (
+              <X size={24} />
+            ) : (
+              <img src="/hamburger.svg" alt="" width={24} height={24} />
+            )}
+          </button>
+        </div>
       </div>
+
+      <nav
+        className={cn(
+          'font-nav border-t border-white/10 bg-primary-dark md:hidden',
+          isMobileMenuOpen ? 'block' : 'hidden'
+        )}
+        aria-label="Mobile navigation"
+      >
+        <ul className="flex flex-col gap-1 px-4 py-4">
+          {NAV_LINKS.map((link) => (
+            <li key={link.href}>
+              <Link
+                href={link.href}
+                variant="nav-mobile"
+                onClick={closeMobileMenu}
+              >
+                {link.label}
+              </Link>
+            </li>
+          ))}
+          <li className="pt-2">
+            <Link
+              href="#contact"
+              variant="glass-full"
+              onClick={closeMobileMenu}
+            >
+              Book a meeting
+            </Link>
+          </li>
+        </ul>
+      </nav>
     </header>
   );
 };

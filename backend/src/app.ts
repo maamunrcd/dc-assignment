@@ -1,10 +1,9 @@
 import cors from 'cors';
 import express from 'express';
-
-import { errorHandler, notFoundHandler } from './middleware/errorHandler.js';
-import featuresRoutes from './routes/features.routes.js';
 import homeRoutes from './routes/home.routes.js';
-import partnersRoutes from './routes/partners.routes.js';
+import sectionsRoutes from './routes/sections.routes.js';
+import siteRoutes from './routes/site.routes.js';
+import { errorHandler, notFoundHandler } from './middleware/errorHandler.js';
 
 const app = express();
 
@@ -15,9 +14,9 @@ app.get('/health', (_req, res) => {
   res.json({ status: 'ok' });
 });
 
+app.use('/api/site', siteRoutes);
 app.use('/api/home', homeRoutes);
-app.use('/api/features', featuresRoutes);
-app.use('/api/partners', partnersRoutes);
+app.use('/api/sections', sectionsRoutes);
 
 app.use(notFoundHandler);
 app.use(errorHandler);

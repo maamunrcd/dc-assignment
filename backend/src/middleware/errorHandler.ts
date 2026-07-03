@@ -5,6 +5,7 @@ export class AppError extends Error {
 
   constructor(message: string, statusCode = 500) {
     super(message);
+    this.name = 'AppError';
     this.statusCode = statusCode;
   }
 }
@@ -14,17 +15,24 @@ export const notFoundHandler = (
   _res: Response,
   next: NextFunction
 ) => {
-  next(new AppError('Resource not found', 404));
+  next(new AppError('Route not found', 404));
 };
 
 export const errorHandler = (
-  err: AppError | Error,
+  err: unknown,
   _req: Request,
   res: Response,
   _next: NextFunction
 ) => {
-  const statusCode = 'statusCode' in err ? err.statusCode : 500;
-  const message = err.message || 'Internal server error';
+  const isAppError = err instanceof AppError;
+  const statusCode = isAppError ? err.statusCode : 500;
+  const message = isAppError
+    ? err.message
+    : 'Internal server error';
+
+  if (!isAppError) {
+    console.error(err);
+  }
 
   res.status(statusCode).json({ message });
 };

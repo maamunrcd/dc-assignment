@@ -1,40 +1,223 @@
 {
-  "heroTitle": "Building Intelligence To Power Scalable Innovation",
-  "heroTitleHighlight": ["Intelligence", "Scalable Innovation"],
-  "heroDescription": "We help forward-thinking companies harness AI and cutting-edge technology to build products that scale with confidence, clarity, and measurable impact.",
-  "heroCta": {
-    "primary": "Get Started",
-    "secondary": "Watch Video"
+  "heroes": [
+    {
+      "id": "hero-legacy",
+      "isActive": false,
+      "publishedAt": "2026-01-01T00:00:00.000Z",
+      "title": "Building Intelligence To Power Scalable Innovation",
+      "titleAccent": "Intelligence To Power",
+      "subtitle": "We help forward-thinking companies harness AI and modern engineering to build products that scale with confidence, speed, and measurable impact.",
+      "cta": {
+        "label": "Get Started",
+        "href": "#contact"
+      },
+      "media": {
+        "backgroundImage": "/hero-banner.png",
+        "mobileImageUrl": "/hero-mobile.png",
+        "playUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "alt": "MetaTech team"
+      }
+    },
+    {
+      "id": "hero-current",
+      "isActive": true,
+      "publishedAt": "2026-03-01T00:00:00.000Z",
+      "title": "Building Intelligence To Power Scalable Innovation",
+      "titleAccent": "Intelligence To Power",
+      "subtitle": "MetaTech integrates custom software engineering, advanced data and AI systems, and strategic staff augmentation to power scalable, high impact digital transformation.",
+      "cta": {
+        "label": "Book for Demo",
+        "href": "#contact"
+      },
+      "media": {
+        "backgroundImage": "/hero-banner.png",
+        "mobileImageUrl": "/hero-mobile.png",
+        "playUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "alt": "MetaTech team"
+      }
+    }
+  ],
+  "trustedBy": {
+    "logos": [
+      {
+        "id": "brand-1",
+        "imageUrl": "/brand1.png",
+        "imageTitle": "Databricks",
+        "order": 1
+      },
+      {
+        "id": "brand-2",
+        "imageUrl": "/brand2.png",
+        "imageTitle": "Google Cloud",
+        "order": 2
+      },
+      {
+        "id": "brand-3",
+        "imageUrl": "/brand3.png",
+        "imageTitle": "UiPath",
+        "order": 3
+      },
+      {
+        "id": "brand-4",
+        "imageUrl": "/brand4.png",
+        "imageTitle": "Alteryx",
+        "order": 4
+      },
+      {
+        "id": "brand-5",
+        "imageUrl": "/brand4.png",
+        "imageTitle": "Alteryx",
+        "order": 5
+      },
+      {
+        "id": "brand-6",
+        "imageUrl": "/brand5.png",
+        "imageTitle": "Figma",
+        "order": 6
+      },
+      {
+        "id": "brand-7",
+        "imageUrl": "/brand6.png",
+        "imageTitle": "AWS",
+        "order": 7
+      },
+      {
+        "id": "brand-8",
+        "imageUrl": "/brand2.png",
+        "imageTitle": "Google Cloud",
+        "order": 8
+      }
+    ]
   },
-  "heroBackgroundImage": "/images/hero-bg.svg",
+  "solutions": {
+    "defaultTabId": "data-ai",
+    "tabs": [
+      {
+        "id": "data-ai",
+        "order": 1,
+        "tabTitle": "Data + AI",
+        "number": "01",
+        "title": "Data + AI Settings Innovation",
+        "subtitle": "Our Data and AI services combine engineering, analytics, and applied AI to help organizations understand data, predict outcomes, and automate decisions. From trusted analytics to production grade AI systems, we deliver intelligence that works in the real world.",
+        "cta": {
+          "label": "Book a consultation",
+          "href": "#contact"
+        },
+        "features": [
+          { "id": "data-integrity", "title": "Data Integrity First" },
+          { "id": "workflows", "title": "Workflows Before Automation" },
+          { "id": "governance", "title": "Governance With Same Standard" }
+        ]
+      },
+      {
+        "id": "custom-software",
+        "order": 2,
+        "tabTitle": "Custom Software",
+        "number": "02",
+        "title": "Custom Software Engineering",
+        "subtitle": "We design and build scalable software platforms tailored to your business — from modern web applications to cloud-native systems that evolve with your product roadmap.",
+        "cta": {
+          "label": "Book a consultation",
+          "href": "#contact"
+        },
+        "features": [
+          { "id": "architecture", "title": "Architecture That Scales" },
+          { "id": "delivery", "title": "Delivery With Discipline" },
+          { "id": "quality", "title": "Quality Built In" }
+        ]
+      },
+      {
+        "id": "tech-staffing",
+        "order": 3,
+        "tabTitle": "Tech Staffing",
+        "number": "03",
+        "title": "Elite Tech Staffing",
+        "subtitle": "Augment your team with senior engineers, data specialists, and AI practitioners who integrate quickly and raise the bar on execution, collaboration, and outcomes.",
+        "cta": {
+          "label": "Book a consultation",
+          "href": "#contact"
+        },
+        "features": [
+          { "id": "senior-talent", "title": "Senior Talent Only" },
+          { "id": "embedded", "title": "Embedded Collaboration" },
+          { "id": "outcomes", "title": "Outcome-Focused Teams" }
+        ]
+      }
+    ]
+  },
   "productHighlight": {
-    "title": "An AI-powered credibility checking platform",
-    "description": "Verify claims, sources, and narratives in real time with enterprise-grade accuracy. Built for teams that need trust at scale.",
-    "ctaLabel": "Learn More",
-    "image": "/images/product-tablet.svg"
-  },
-  "footer": {
+    "defaultProductId": "ami-credible",
     "products": [
-      { "label": "AI Platform", "href": "#" },
-      { "label": "Credibility Engine", "href": "#" },
-      { "label": "Analytics Suite", "href": "#" },
-      { "label": "Integrations", "href": "#" }
-    ],
-    "company": [
-      { "label": "About Us", "href": "#about" },
-      { "label": "Careers", "href": "#" },
-      { "label": "Blog", "href": "#" },
-      { "label": "Contact", "href": "#contact" }
-    ],
-    "socials": [
-      { "label": "LinkedIn", "href": "https://linkedin.com", "icon": "linkedin" },
-      { "label": "Twitter", "href": "https://twitter.com", "icon": "twitter" },
-      { "label": "GitHub", "href": "https://github.com", "icon": "github" }
-    ],
-    "legal": [
-      { "label": "Privacy Policy", "href": "#" },
-      { "label": "Terms of Service", "href": "#" }
-    ],
-    "copyright": "© 2026 METATECH. All rights reserved."
+      {
+        "id": "ami-credible",
+        "order": 1,
+        "name": "AmICredible",
+        "logo": {
+          "imageUrl": "/product-logo.png",
+          "alt": "AmICredible"
+        },
+        "title": "An AI-powered credibility checking platform",
+        "subtitle": "that helps users verify claims, analyze sources, and make informed decisions with Quick Check, Deep Check, and Image Check features.",
+        "cta": {
+          "label": "Explore more",
+          "href": "#"
+        },
+        "slides": [
+          {
+            "id": "ami-slide-1",
+            "order": 1,
+            "imageUrl": "/product1.png",
+            "alt": "AmICredible product dashboard on tablet"
+          },
+          {
+            "id": "ami-slide-2",
+            "order": 2,
+            "imageUrl": "/product1.png",
+            "alt": "AmICredible product dashboard on tablet"
+          },
+          {
+            "id": "ami-slide-3",
+            "order": 3,
+            "imageUrl": "/product1.png",
+            "alt": "AmICredible product dashboard on tablet"
+          }
+        ]
+      }
+    ]
+  },
+  "techStack": {
+    "title": "Built With Modern Technologies",
+    "subtitle": "We use modern, reliable technologies to design, build, and scale high-performance software systems. Our team works with proven tools to deliver secure, scalable, production-ready solutions.",
+    "rows": [
+      {
+        "id": "row-1",
+        "order": 1,
+        "logos": [
+          { "id": "stack-1", "order": 1, "imageUrl": "/stack1.png", "alt": "Technology partner logo" },
+          { "id": "stack-2", "order": 2, "imageUrl": "/stack2.png", "alt": "Technology partner logo" },
+          { "id": "stack-3", "order": 3, "imageUrl": "/stack3.png", "alt": "Technology partner logo" },
+          { "id": "stack-4", "order": 4, "imageUrl": "/stack4.png", "alt": "Technology partner logo" }
+        ]
+      },
+      {
+        "id": "row-2",
+        "order": 2,
+        "logos": [
+          { "id": "stack-5", "order": 1, "imageUrl": "/stack5.png", "alt": "Technology partner logo" },
+          { "id": "stack-6", "order": 2, "imageUrl": "/stack6.png", "alt": "Technology partner logo" },
+          { "id": "stack-7", "order": 3, "imageUrl": "/stack7.png", "alt": "Technology partner logo" },
+          { "id": "stack-8", "order": 4, "imageUrl": "/stack8.png", "alt": "Technology partner logo" }
+        ]
+      },
+      {
+        "id": "row-3",
+        "order": 3,
+        "logos": [
+          { "id": "stack-9", "order": 1, "imageUrl": "/stack9.png", "alt": "Technology partner logo" },
+          { "id": "stack-10", "order": 2, "imageUrl": "/stack10.png", "alt": "Technology partner logo" },
+          { "id": "stack-11", "order": 3, "imageUrl": "/stack11.png", "alt": "Technology partner logo" }
+        ]
+      }
+    ]
   }
 }

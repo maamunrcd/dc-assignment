@@ -1,37 +1,35 @@
 import { Component, type ErrorInfo, type ReactNode } from 'react';
+import { ErrorMessage } from '@/components/Atoms/ErrorMessage';
 
-import { ErrorFallback } from './ErrorFallback';
-
-interface ErrorBoundaryProps {
+interface Props {
   children: ReactNode;
 }
 
-interface ErrorBoundaryState {
+interface State {
   hasError: boolean;
 }
 
-export class ErrorBoundary extends Component<
-  ErrorBoundaryProps,
-  ErrorBoundaryState
-> {
-  state: ErrorBoundaryState = { hasError: false };
+export class ErrorBoundary extends Component<Props, State> {
+  state: State = { hasError: false };
 
-  static getDerivedStateFromError(): ErrorBoundaryState {
+  static getDerivedStateFromError(): State {
     return { hasError: true };
   }
 
-  componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-    console.error('ErrorBoundary caught an error:', error, errorInfo);
+  componentDidCatch(error: Error, info: ErrorInfo) {
+    console.error('ErrorBoundary caught:', error, info);
   }
-
-  handleReset = () => {
-    this.setState({ hasError: false });
-    window.location.reload();
-  };
 
   render() {
     if (this.state.hasError) {
-      return <ErrorFallback onReset={this.handleReset} />;
+      return (
+        <div className="flex min-h-screen items-center justify-center p-6">
+          <ErrorMessage
+            message="An unexpected error occurred."
+            onRetry={() => this.setState({ hasError: false })}
+          />
+        </div>
+      );
     }
 
     return this.props.children;

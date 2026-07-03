@@ -1,149 +1,220 @@
-# METATECH — Figma to Responsive Web Application
+# dc-assignment — METATECH Landing Page
 
-A full-stack landing page implementation for the METATECH assessment. The project converts the provided Figma design into a responsive React application backed by a Node.js/Express REST API serving static JSON content.
+A full-stack assessment project that converts the METATECH Figma design into a responsive, API-driven React application backed by a Node.js/Express REST API.
 
-## Live Demo
+**Repository:** [github.com/maamunrcd/dc-assignment](https://github.com/maamunrcd/dc-assignment)
 
-> Optional: deploy frontend (Vercel/Netlify) and backend (Render/Railway) and add URLs here.
+---
 
-## Tech Stack
+## Table of Contents
 
-| Layer | Technologies |
-|-------|-------------|
-| Frontend | React 19, TypeScript, Vite, Tailwind CSS v4, React Router, React Query, Axios |
-| Backend | Node.js, Express, TypeScript |
-| State Management | React Context (UI state) + TanStack React Query (server state) |
-| Tooling | concurrently (monorepo dev), tsx (backend dev) |
+- [Technologies Used](#technologies-used)
+- [Features](#features)
+- [Prerequisites](#prerequisites)
+- [Setup Instructions](#setup-instructions)
+- [Project Structure](#project-structure)
+- [API Documentation](#api-documentation)
+- [Environment Variables](#environment-variables)
+- [Assumptions](#assumptions)
+- [Future Improvements](#future-improvements)
+- [Bonus Criteria](#bonus-criteria)
+
+---
+
+## Technologies Used
+
+| Layer | Stack |
+|-------|-------|
+| **Frontend** | React 19, TypeScript, Vite 8, Tailwind CSS v4, React Router 7, TanStack React Query, Axios |
+| **Backend** | Node.js, Express 4, TypeScript, CORS |
+| **State** | React Query (server state) + React Context (UI: mobile menu) |
+| **Tooling** | concurrently (monorepo dev), tsx (backend hot reload), oxlint |
+
+---
+
+## Features
+
+- Dynamic content from REST APIs (no hardcoded page copy)
+- Page-level and layout-level loading skeletons
+- Graceful API error handling with retry actions
+- Global `ErrorBoundary` for unexpected render failures
+- Mobile-first responsive layout (hero, header hamburger, solutions tabs)
+- Separate desktop/mobile hero images via API (`backgroundImage`, `mobileImageUrl`)
+- Performance: route code splitting + **Import on Visibility** for below-fold sections
+- Basic SEO: semantic HTML, `lang`, meta description, document title
+
+---
 
 ## Prerequisites
 
-- Node.js >= 20
-- npm >= 9
+- **Node.js** >= 20
+- **npm** >= 9
 
-## Quick Start
+---
 
-From the project root:
+## Setup Instructions
+
+### 1. Clone the repository
 
 ```bash
-# Install all dependencies (root + frontend + backend)
-npm run install:all
+git clone https://github.com/maamunrcd/dc-assignment.git
+cd dc-assignment
+```
 
-# Start both servers with one command
+### 2. Install dependencies
+
+```bash
+npm run install:all
+```
+
+This installs packages for the root workspace, `frontend/`, and `backend/`.
+
+### 3. Configure environment (optional)
+
+```bash
+cp backend/.env.example backend/.env
+cp frontend/env.example frontend/.env
+```
+
+Defaults work out of the box for local development.
+
+### 4. Start development servers
+
+```bash
 npm run dev
 ```
 
-- Frontend: http://localhost:5173
-- Backend API: http://localhost:3001
-- Health check: http://localhost:3001/health
+| Service | URL |
+|---------|-----|
+| Frontend (Vite) | http://localhost:5173 |
+| Backend (Express) | http://localhost:3001 |
+| Health check | http://localhost:3001/health |
 
-In development, the frontend proxies `/api/*` requests to the backend via Vite, so no CORS setup is needed locally.
+Vite proxies `/api/*` to the backend in development, so the frontend can call APIs without CORS issues.
 
-### Production build
+### 5. Production build
 
 ```bash
-npm run build
+npm run build          # Build frontend
+cd backend && npm run build && npm start   # Build & run backend
+cd frontend && npm run preview             # Preview frontend build
 ```
 
-The production build output is in `frontend/dist`.
+---
 
 ## Project Structure
 
 ```
-assignment-dc/
-├── package.json          # Root scripts (npm run dev)
+dc-assignment/
+├── package.json              # Root scripts (concurrently)
 ├── README.md
-├── frontend/
-│   ├── public/images/    # Hero, product, and partner logo assets
+├── backend/
 │   └── src/
-│       ├── app/          # Page-level components (home, not-found)
-│       ├── components/   # Shared UI (Atoms, Layout, Providers, ErrorBoundary)
-│       ├── context/      # WebsiteContext (feature tabs, mobile menu)
-│       ├── features/home/# Feature modules (components, hooks, types)
-│       ├── hooks/
-│       ├── lib/config/   # Constants and API endpoints
-│       ├── routes/
-│       └── services/     # Axios API client
-└── backend/
+│       ├── app.ts            # Express app + route mounting
+│       ├── server.ts         # HTTP server entry
+│       ├── controllers/      # Request handlers
+│       ├── routes/           # /api/home, /api/site, /api/sections/*
+│       ├── services/         # Domain services (hero, solutions, etc.)
+│       ├── data/             # Static JSON content (home.json, site.json)
+│       ├── middleware/       # Error handling
+│       └── utils/            # sort, asyncHandler
+└── frontend/
+    ├── public/               # Static assets (hero, logos, icons)
     └── src/
-        ├── data/         # Static JSON content
-        ├── controllers/
-        ├── routes/
-        ├── middleware/
-        ├── app.ts
-        └── server.ts
+        ├── app/                # Page components (home, not-found)
+        ├── components/
+        │   ├── Atoms/          # Link, LazyImage, LazyOnVisible, Spinner, etc.
+        │   ├── Layout/         # Header, MainLayout
+        │   ├── ErrorBoundary/
+        │   └── Providers/      # QueryClient + WebsiteContext
+        ├── features/           # Feature modules (hero, solutions, showcase, …)
+        │   ├── hero/
+        │   ├── trusted-by/
+        │   ├── solutions/
+        │   ├── showcase/
+        │   ├── tech-stack/
+        │   ├── site/           # Footer + useSiteQuery
+        │   └── home/           # useHomePageQuery, lazy-sections
+        ├── lib/
+        │   ├── config/         # endpoints, navigation
+        │   └── query/          # query keys, cache hydration
+        ├── routes/             # React Router + lazy pages
+        ├── services/           # Axios instance + API fetchers
+        └── types/              # Shared API TypeScript types
 ```
+
+### Architecture highlights
+
+- **BFF pattern:** `GET /api/home` aggregates all home sections in one request.
+- **Section endpoints:** Reusable `GET /api/sections/*` routes for individual sections.
+- **Site config:** `GET /api/site` serves footer data separately from home content.
+- **Props-based sections:** Components accept typed props; hooks hydrate caches when home data loads.
+- **Lazy loading:** Below-fold sections (`Solutions`, `Showcase`, `TechStack`) load JS chunks when scrolled into view.
+
+---
 
 ## API Documentation
 
 ### `GET /api/home`
 
-Returns hero content, product highlight, and footer data.
+Returns all home page sections (hero, trusted-by, solutions, showcase, tech stack).
 
 ```json
 {
-  "heroTitle": "Building Intelligence To Power Scalable Innovation",
-  "heroTitleHighlight": ["Intelligence", "Scalable Innovation"],
-  "heroDescription": "...",
-  "heroCta": { "primary": "Get Started", "secondary": "Watch Video" },
-  "heroBackgroundImage": "/images/hero-bg.svg",
-  "productHighlight": {
-    "title": "An AI-powered credibility checking platform",
-    "description": "...",
-    "ctaLabel": "Learn More",
-    "image": "/images/product-tablet.svg"
+  "hero": {
+    "id": "hero-current",
+    "title": "Building Intelligence To Power Scalable Innovation",
+    "titleAccent": "Intelligence To Power",
+    "subtitle": "...",
+    "cta": { "label": "Book for Demo", "href": "#contact" },
+    "media": {
+      "backgroundImage": "/hero-banner.png",
+      "mobileImageUrl": "/hero-mobile.png",
+      "playUrl": "https://www.youtube.com/watch?v=...",
+      "alt": "MetaTech team"
+    }
   },
+  "trustedBy": { "logos": [{ "id": "brand-1", "imageUrl": "/brand1.png", "imageTitle": "...", "order": 1 }] },
+  "solutions": { "defaultTabId": "data-ai", "tabs": [] },
+  "showcase": { "defaultProductId": "ami-credible", "products": [] },
+  "techStack": { "title": "...", "subtitle": "...", "rows": [] }
+}
+```
+
+### `GET /api/site`
+
+Returns global site data (footer).
+
+```json
+{
   "footer": {
-    "products": [{ "label": "AI Platform", "href": "#" }],
-    "company": [{ "label": "About Us", "href": "#about" }],
-    "socials": [{ "label": "LinkedIn", "href": "...", "icon": "linkedin" }],
+    "copyright": { "prefix": "©", "year": 2026, "company": "METATECH" },
     "legal": [{ "label": "Privacy Policy", "href": "#" }],
-    "copyright": "© 2026 METATECH. All rights reserved."
+    "socials": [{ "label": "LinkedIn", "href": "#", "icon": "linkedin" }],
+    "brandBanner": { "imageUrl": "/footer-bg.png" }
   }
 }
 ```
 
-### `GET /api/features`
+### Section endpoints
 
-Returns solutions section content with filterable categories.
-
-```json
-{
-  "sectionTitle": "Our leading-edge solutions are designed to transform how you build",
-  "sectionDescription": "...",
-  "categories": ["All", "Software", "Hardware"],
-  "features": [
-    {
-      "id": "01",
-      "number": "01",
-      "title": "Smart Efficiency & Innovation",
-      "description": "...",
-      "category": "Software",
-      "ctaLabel": "Learn More"
-    }
-  ],
-  "highlightCards": [
-    { "id": "card-1", "title": "AI-driven insights", "description": "..." }
-  ]
-}
-```
-
-### `GET /api/partners`
-
-Returns media and trusted-by logo data.
-
-```json
-{
-  "mediaLogos": [{ "id": "nyt", "name": "The New York Times", "logo": "/images/logos/nyt.svg" }],
-  "trustedLogos": [{ "id": "slack", "name": "Slack", "logo": "/images/logos/slack.svg" }],
-  "trustedHeading": "Trusted by leading companies"
-}
-```
+| Endpoint | Description |
+|----------|-------------|
+| `GET /api/sections/hero` | Active hero content |
+| `GET /api/sections/trusted-by` | Trusted client logos |
+| `GET /api/sections/solutions` | Solutions tabs + features |
+| `GET /api/sections/showcase` | Product highlight carousel |
+| `GET /api/sections/tech-stack` | Technology logos grid |
 
 ### Error responses
 
 ```json
-{ "message": "Resource not found" }
+{ "message": "Route not found" }
 ```
+
+HTTP errors are normalized on the frontend via an Axios response interceptor.
+
+---
 
 ## Environment Variables
 
@@ -153,76 +224,69 @@ Returns media and trusted-by logo data.
 PORT=3001
 ```
 
-Copy from `backend/.env.example`.
-
 ### Frontend (`frontend/.env`)
 
 ```env
-# Leave empty in development (uses Vite proxy)
-VITE_BACKEND_API_URL=
-
-# For production, set to your deployed API URL
-# VITE_BACKEND_API_URL=https://your-api.example.com
+# Leave empty in development — Vite proxies /api to localhost:3001
+# VITE_BACKEND_API_URL=http://localhost:3001
 ```
 
-Copy from `frontend/.env.example`.
+Set `VITE_BACKEND_API_URL` when deploying the frontend separately from the API.
 
-## Architecture Decisions
-
-### Monorepo with `concurrently`
-
-Both apps run independently with their own hot reload (Vite HMR + tsx watch). The root `npm run dev` orchestrates them without coupling build tools.
-
-### React Context + React Query
-
-- **React Context** manages client UI state: active feature category tabs and mobile navigation menu.
-- **React Query** handles server state: fetching, caching, loading, and error/retry for API data.
-
-This satisfies the assessment's state management requirement while keeping async data logic clean and testable.
-
-### Folder structure
-
-The frontend follows the `react-boilerplate-ts` conventions (`app/`, `features/`, `components/Atoms`, `services/`, `lib/config`, `routes/`) adapted for a marketing landing page without auth or i18n.
+---
 
 ## Assumptions
 
-1. **Static content** — No database or authentication; all content is served from JSON files.
-2. **Placeholder assets** — Hero background, product mockup, and partner logos use generated SVG placeholders. Replace with exported Figma assets for pixel-perfect fidelity.
-3. **Single-page app** — Navigation uses anchor links (`#services`, `#about`, `#contact`) on one route.
-4. **Video play button** — Decorative only; no embedded video player wired up.
-5. **CTA buttons** — "Get Started" and "Learn More" are presentational without form/modal flows.
+1. **Static JSON content** — No database or authentication; content is managed in `backend/src/data/*.json`.
+2. **Active hero selection** — The hero with `isActive: true` is served by the API.
+3. **Plain text in API** — No HTML in JSON; accent styling is applied on the frontend (`titleAccent`).
+4. **Single landing page** — Anchor navigation (`#home`, `#solutions`, `#showcase`, `#contact`).
+5. **Public assets** — Images referenced in JSON live in `frontend/public/`.
+6. **Intro copy is static** — The solutions “We Are />” intro block is UI copy, not API-driven.
+7. **Play button** — Links to an external URL (`playUrl`); no embedded video modal.
+8. **Modern browsers** — Targets evergreen browsers (Chrome, Firefox, Safari, Edge).
+
+---
 
 ## Future Improvements
 
-- [ ] Deploy frontend (Vercel/Netlify) and backend (Render/Railway)
-- [ ] Replace placeholder SVGs with exported Figma assets
-- [ ] Add unit tests with React Testing Library and Vitest
-- [ ] Add scroll-triggered animations and section transitions
-- [ ] Embed a real video modal for the hero play button
-- [ ] Add Open Graph / Twitter Card meta tags for social sharing
-- [ ] Connect to a CMS for content management
-- [ ] Add contact form with backend validation
+- [ ] Deploy frontend (Vercel/Netlify) and backend (Railway/Render/Fly.io)
+- [ ] Add unit/integration tests (Vitest + React Testing Library)
+- [ ] Open Graph tags, Twitter cards, and JSON-LD structured data
+- [ ] Scroll-triggered animations (Framer Motion or CSS `@keyframes`)
+- [ ] Image `srcSet` / `<picture>` for responsive hero assets
+- [ ] CMS integration to replace static JSON
+- [ ] Per-section error boundaries if sections fetch independently
+- [ ] Remove unused dependencies (`react-access-boundary-v2`, `zustand`, `i18next`)
+- [ ] Accessibility audit (focus traps in mobile menu, reduced motion)
 
-## Scripts Reference
+---
 
-| Command | Description |
-|---------|-------------|
-| `npm run dev` | Start backend + frontend concurrently |
-| `npm run build` | Build frontend for production |
-| `npm run install:all` | Install dependencies for all packages |
+## Bonus Criteria
 
-### Frontend only
+| Criteria | Status |
+|----------|--------|
+| TypeScript (frontend + backend) | ✅ Implemented |
+| Performance optimization | ✅ Route splitting, React Query cache, lazy images, Import on Visibility |
+| Basic SEO | ✅ `lang`, title, meta description, semantic landmarks |
+| Animations & transitions | ✅ Skeleton pulse, hover states, tab transitions |
+| Unit tests | ❌ Not implemented |
+| Deployed application | ❌ Not deployed (ready for Vercel + Render) |
 
-```bash
-cd frontend && npm run dev
-```
+---
 
-### Backend only
+## Design Tokens
 
-```bash
-cd backend && npm run dev
-```
+| Token | Value |
+|-------|-------|
+| Primary dark | `#001A11` |
+| Primary | `#003D28` |
+| Accent (neon green) | `#06FF70` / `#00FF41` |
+| Surface (cards) | `#EFEFEF` |
+| Font | Inter |
 
-## Author
+---
 
-Assessment submission for DataCrunch — METATECH landing page implementation.
+## License
+
+Assessment project — not for commercial distribution.

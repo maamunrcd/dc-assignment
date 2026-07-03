@@ -1,94 +1,76 @@
-import {
-  useFeaturesQuery,
-  useHomeQuery,
-  usePartnersQuery,
-} from '@/features/home/hooks/useHomeQueries';
-import { FeaturesSection } from '@/features/home/components/FeaturesSection';
-import { HeroSection } from '@/features/home/components/HeroSection';
-import { MediaLogoCloud } from '@/features/home/components/MediaLogoCloud';
-import { ProductHighlight } from '@/features/home/components/ProductHighlight';
-import { TrustedBySection } from '@/features/home/components/TrustedBySection';
-
-import { ErrorMessage } from '@/components/Atoms/ErrorMessage';
-import { HeroSkeleton } from '@/components/Atoms/HeroSkeleton';
-import { SectionSkeleton } from '@/components/Atoms/SectionSkeleton';
 import { MainLayout } from '@/components/Layout/MainLayout';
+import { ErrorMessage } from '@/components/Atoms/ErrorMessage';
+import { LazyOnVisible } from '@/components/Atoms/LazyOnVisible';
+import { SectionSkeleton } from '@/components/Atoms/SectionSkeleton';
+import { HeroBlock } from '@/features/hero/components/HeroBlock';
+import { useHomePageQuery } from '@/features/home/hooks/useHomePageQuery';
+import {
+  LazyShowcaseSection,
+  LazySolutionsSection,
+  LazyTechStackSection,
+} from '@/features/home/lazy-sections';
+import { TrustedClients } from '@/features/trusted-by/components/TrustedClients';
 
-import type { ApiError } from '@/features/home/types';
+const solutionsFallback = (
+  <SectionSkeleton className="min-h-[480px] py-16" variant="light" />
+);
 
-const getErrorMessage = (error: unknown, fallback: string) => {
-  if (error && typeof error === 'object' && 'message' in error) {
-    return String((error as ApiError).message);
-  }
+const showcaseFallback = (
+  <SectionSkeleton className="min-h-[420px] py-16" />
+);
 
-  return fallback;
-};
+const techStackFallback = (
+  <SectionSkeleton className="min-h-[360px] py-16" />
+);
+
+const HomePageLoading = () => (
+  <MainLayout>
+    <div className="space-y-8 px-5 py-16">
+      <SectionSkeleton className="py-12" />
+      <SectionSkeleton className="py-24" />
+      <SectionSkeleton className="py-16" variant="light" />
+    </div>
+  </MainLayout>
+);
+
+const HomePageError = ({ onRetry }: { onRetry: () => void }) => (
+  <MainLayout>
+    <div className="px-5 py-24">
+      <ErrorMessage
+        message="Unable to load the home page. Please check your connection and try again."
+        onRetry={onRetry}
+      />
+    </div>
+  </MainLayout>
+);
 
 const HomePage = () => {
-  const homeQuery = useHomeQuery();
-  const featuresQuery = useFeaturesQuery();
-  const partnersQuery = usePartnersQuery();
+  const { data, isLoading, isError, refetch } = useHomePageQuery();
+
+  if (isLoading) {
+    return <HomePageLoading />;
+  }
+
+  if (isError || !data) {
+    return <HomePageError onRetry={() => void refetch()} />;
+  }
 
   return (
-    <MainLayout footer={homeQuery.data?.footer}>
-      {homeQuery.isLoading ? (
-        <HeroSkeleton />
-      ) : homeQuery.isError ? (
-        <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-          <ErrorMessage
-            message={getErrorMessage(
-              homeQuery.error,
-              'Failed to load home content.'
-            )}
-            onRetry={() => homeQuery.refetch()}
-          />
-        </div>
-      ) : homeQuery.data ? (
-        <HeroSection data={homeQuery.data} />
-      ) : null}
+    <MainLayout>
+      <HeroBlock hero={data.hero} />
+      <TrustedClients logos={data.trustedBy.logos} />
 
-      {partnersQuery.isLoading ? (
-        <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-          <SectionSkeleton lines={2} />
-        </div>
-      ) : partnersQuery.isError ? (
-        <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-          <ErrorMessage
-            message="Failed to load partner logos."
-            onRetry={() => partnersQuery.refetch()}
-          />
-        </div>
-      ) : partnersQuery.data ? (
-        <MediaLogoCloud logos={partnersQuery.data.mediaLogos} />
-      ) : null}
+      <LazyOnVisible fallback={solutionsFallback}>
+        <LazySolutionsSection solutions={data.solutions} />
+      </LazyOnVisible>
 
-      {featuresQuery.isLoading ? (
-        <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-          <SectionSkeleton lines={6} />
-        </div>
-      ) : featuresQuery.isError ? (
-        <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-          <ErrorMessage
-            message="Failed to load features."
-            onRetry={() => featuresQuery.refetch()}
-          />
-        </div>
-      ) : featuresQuery.data ? (
-        <FeaturesSection data={featuresQuery.data} />
-      ) : null}
+      <LazyOnVisible fallback={showcaseFallback}>
+        <LazyShowcaseSection showcase={data.showcase} />
+      </LazyOnVisible>
 
-      {homeQuery.data ? (
-        <ProductHighlight data={homeQuery.data.productHighlight} />
-      ) : null}
-
-      {partnersQuery.data ? (
-        <TrustedBySection
-          data={{
-            trustedHeading: partnersQuery.data.trustedHeading,
-            trustedLogos: partnersQuery.data.trustedLogos,
-          }}
-        />
-      ) : null}
+      <LazyOnVisible fallback={techStackFallback}>
+        <LazyTechStackSection techStack={data.techStack} />
+      </LazyOnVisible>
     </MainLayout>
   );
 };
