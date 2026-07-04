@@ -3,7 +3,7 @@ import { AsyncSection } from '@/components/Atoms/AsyncSection';
 import { LazyOnVisible } from '@/components/Atoms/LazyOnVisible';
 import { SectionSkeleton } from '@/components/Atoms/SectionSkeleton';
 import { HeroBlock } from '@/features/hero/components/HeroBlock';
-import { useHomePageQuery } from '@/features/home/hooks/useHomePageQuery';
+import { useHomePageQuery } from '@/features/home/useHomePageQuery';
 import {
   LazyShowcaseSection,
   LazySolutionsSection,
