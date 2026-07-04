@@ -1,6 +1,6 @@
 import { Link } from '@/components/Atoms/Link';
 import { LazyImage } from '@/components/Atoms/LazyImage';
-import { Slider } from '@/lib/utils/slickSlider';
+import { Slider } from '@/features/showcase/utils/slickSlider';
 import type { ShowcaseData } from '@/types/api';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';

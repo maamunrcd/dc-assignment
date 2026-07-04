@@ -1,5 +1,5 @@
 import { MainLayout } from '@/components/Layout/MainLayout';
-import { ErrorMessage } from '@/components/Atoms/ErrorMessage';
+import { AsyncSection } from '@/components/Atoms/AsyncSection';
 import { LazyOnVisible } from '@/components/Atoms/LazyOnVisible';
 import { SectionSkeleton } from '@/components/Atoms/SectionSkeleton';
 import { HeroBlock } from '@/features/hero/components/HeroBlock';
@@ -23,54 +23,38 @@ const techStackFallback = (
   <SectionSkeleton className="min-h-[360px] py-16" />
 );
 
-const HomePageLoading = () => (
-  <MainLayout>
-    <div className="space-y-8 px-5 py-16">
-      <SectionSkeleton className="py-12" />
-      <SectionSkeleton className="py-24" />
-      <SectionSkeleton className="py-16" variant="light" />
-    </div>
-  </MainLayout>
-);
-
-const HomePageError = ({ onRetry }: { onRetry: () => void }) => (
-  <MainLayout>
-    <div className="px-5 py-24">
-      <ErrorMessage
-        message="Unable to load the home page. Please check your connection and try again."
-        onRetry={onRetry}
-      />
-    </div>
-  </MainLayout>
-);
-
 const HomePage = () => {
   const { data, isLoading, isError, refetch } = useHomePageQuery();
-
-  if (isLoading) {
-    return <HomePageLoading />;
-  }
-
-  if (isError || !data) {
-    return <HomePageError onRetry={() => void refetch()} />;
-  }
+  const hasError = isError || (!isLoading && !data);
 
   return (
     <MainLayout>
-      <HeroBlock hero={data.hero} />
-      <TrustedClients logos={data.trustedBy.logos} />
+      <AsyncSection
+        isLoading={isLoading}
+        isError={hasError}
+        onRetry={() => void refetch()}
+        errorMessage="Unable to load the home page. Please check your connection and try again."
+        skeletonClassName="space-y-8 px-5 py-16"
+      >
+        {data && (
+          <>
+            <HeroBlock hero={data.hero} />
+            <TrustedClients logos={data.trustedBy.logos} />
 
-      <LazyOnVisible fallback={solutionsFallback}>
-        <LazySolutionsSection solutions={data.solutions} />
-      </LazyOnVisible>
+            <LazyOnVisible fallback={solutionsFallback}>
+              <LazySolutionsSection solutions={data.solutions} />
+            </LazyOnVisible>
 
-      <LazyOnVisible fallback={showcaseFallback}>
-        <LazyShowcaseSection showcase={data.showcase} />
-      </LazyOnVisible>
+            <LazyOnVisible fallback={showcaseFallback}>
+              <LazyShowcaseSection showcase={data.showcase} />
+            </LazyOnVisible>
 
-      <LazyOnVisible fallback={techStackFallback}>
-        <LazyTechStackSection techStack={data.techStack} />
-      </LazyOnVisible>
+            <LazyOnVisible fallback={techStackFallback}>
+              <LazyTechStackSection techStack={data.techStack} />
+            </LazyOnVisible>
+          </>
+        )}
+      </AsyncSection>
     </MainLayout>
   );
 };

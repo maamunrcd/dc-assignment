@@ -1,21 +1,21 @@
 import homeData from '../data/home.json' with { type: 'json' };
 import { resolveDefaultId, sortByOrder } from '../utils/sort.js';
 
-type ProductHighlightItem = (typeof homeData.productHighlight.products)[number];
+type ShowcaseProductItem = (typeof homeData.showcase.products)[number];
 
-const normalizeProducts = (products: ProductHighlightItem[]) =>
+const normalizeProducts = (products: ShowcaseProductItem[]) =>
   sortByOrder(products).map((product) => ({
     ...product,
     slides: sortByOrder(product.slides),
   }));
 
 export const getShowcase = () => {
-  const products = normalizeProducts(homeData.productHighlight.products);
+  const products = normalizeProducts(homeData.showcase.products);
 
   return {
     defaultProductId: resolveDefaultId(
       products,
-      homeData.productHighlight.defaultProductId
+      homeData.showcase.defaultProductId
     ),
     products,
   };

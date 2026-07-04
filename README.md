@@ -149,6 +149,7 @@ dc-assignment/
 - **Section endpoints:** Reusable `GET /api/sections/*` routes for individual sections.
 - **Site config:** `GET /api/site` serves footer data separately from home content.
 - **Props-based sections:** Components accept typed props; hooks hydrate caches when home data loads.
+- **Section hooks (`useHeroQuery`, etc.):** Reserved for future standalone pages that fetch individual sections via `/api/sections/*` without loading the full home payload.
 - **Lazy loading:** Below-fold sections (`Solutions`, `Showcase`, `TechStack`) load JS chunks when scrolled into view.
 
 ---
@@ -286,7 +287,6 @@ vercel dev
 - [ ] Image `srcSet` / `<picture>` for responsive hero assets
 - [ ] CMS integration to replace static JSON
 - [ ] Per-section error boundaries if sections fetch independently
-- [ ] Remove unused dependencies (`react-access-boundary-v2`, `zustand`, `i18next`)
 - [ ] Accessibility audit (focus traps in mobile menu, reduced motion)
 
 ---
