@@ -1,4 +1,4 @@
-import homeData from '../data/home.json' with { type: 'json' };
+import { homeData } from '../data/store.js';
 
 type HeroItem = (typeof homeData.heroes)[number];
 

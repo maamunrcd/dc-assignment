@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "tsx watch src/server.ts",
-    "build": "tsc && cp -r src/data dist/data",
+    "build": "rm -rf dist && tsc && cp -r src/data dist/data",
     "start": "node dist/server.js"
   },
   "dependencies": {

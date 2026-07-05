@@ -1,5 +1,4 @@
-import homeData from '../data/home.json' with { type: 'json' };
-import siteData from '../data/site.json' with { type: 'json' };
+import { homeData, siteData } from '../data/store.js';
 import { sortByOrder } from '../utils/sort.js';
 
 type FooterNavLink = (typeof siteData.footer.legal)[number];

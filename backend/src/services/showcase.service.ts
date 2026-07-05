@@ -1,4 +1,4 @@
-import homeData from '../data/home.json' with { type: 'json' };
+import { homeData } from '../data/store.js';
 import { resolveDefaultId, sortByOrder } from '../utils/sort.js';
 
 type ShowcaseProductItem = (typeof homeData.showcase.products)[number];

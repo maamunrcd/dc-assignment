@@ -1,4 +1,4 @@
-import homeData from '../data/home.json' with { type: 'json' };
+import { homeData } from '../data/store.js';
 import { sortByOrder } from '../utils/sort.js';
 
 type TechStackRow = (typeof homeData.techStack.rows)[number];
