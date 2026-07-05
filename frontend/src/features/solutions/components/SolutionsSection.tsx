@@ -22,9 +22,11 @@ export const SolutionsSection = ({ solutions }: SolutionsSectionProps) => {
 
   return (
     <section id="solutions" className="bg-white pt-10 text-primary-dark sm:pt-16 lg:pt-24">
-      <SectionContainer>
-        <SolutionsIntro />
-      </SectionContainer>
+      {solutions.intro && (
+        <SectionContainer>
+          <SolutionsIntro intro={solutions.intro} />
+        </SectionContainer>
+      )}
 
       <div className="mt-6 bg-[rgba(239,239,239,1)] pt-5 pb-12 sm:mt-10 sm:pt-[30px] sm:pb-[73px] lg:mt-14">
         <SectionContainer>

@@ -1,4 +1,40 @@
 {
+  "seo": {
+    "title": "METATECH — Building Intelligence To Power Scalable Innovation",
+    "description": "MetaTech integrates custom software engineering, advanced data and AI systems, and strategic staff augmentation to power scalable digital transformation."
+  },
+  "header": {
+    "logo": {
+      "imageUrl": "/logo.svg",
+      "alt": "METATECH",
+      "href": "#home"
+    },
+    "navLinks": [
+      {
+        "id": "solutions",
+        "order": 1,
+        "label": "Solutions",
+        "href": "#solutions",
+        "hasMegaMenu": true
+      },
+      {
+        "id": "showcase",
+        "order": 2,
+        "label": "Showcase",
+        "href": "#showcase"
+      },
+      {
+        "id": "contact",
+        "order": 3,
+        "label": "Contact",
+        "href": "#contact"
+      }
+    ],
+    "cta": {
+      "label": "Book a meeting",
+      "href": "#contact"
+    }
+  },
   "footer": {
     "copyright": {
       "startYear": 2022,

@@ -3,12 +3,16 @@ import { cn } from '@/lib/utils/cn';
 
 interface LazyImageProps extends ImgHTMLAttributes<HTMLImageElement> {
   fallbackClassName?: string;
+  priority?: boolean;
 }
 
 export const LazyImage = ({
   alt,
   className,
   fallbackClassName,
+  priority = false,
+  loading,
+  fetchPriority,
   onError,
   ...props
 }: LazyImageProps) => {
@@ -32,7 +36,9 @@ export const LazyImage = ({
     <img
       alt={alt}
       className={className}
-      loading="lazy"
+      loading={loading ?? (priority ? 'eager' : 'lazy')}
+      fetchPriority={fetchPriority ?? (priority ? 'high' : undefined)}
+      decoding="async"
       onError={(event) => {
         setHasError(true);
         onError?.(event);

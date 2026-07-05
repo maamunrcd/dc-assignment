@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react';
+import { useEffect, type ReactNode } from 'react';
 import { Header } from '@/components/Layout/Header';
 import { SectionSkeleton } from '@/components/Atoms/SectionSkeleton';
 import { ErrorMessage } from '@/components/Atoms/ErrorMessage';
@@ -12,10 +12,28 @@ interface MainLayoutProps {
 export const MainLayout = ({ children }: MainLayoutProps) => {
   const { data: site, isLoading, isError, refetch } = useSiteQuery();
   const footer = site?.footer;
+  const header = site?.header;
+  const solutionsMenu = site?.solutionsMenu;
+
+  useEffect(() => {
+    if (!site?.seo) {
+      return;
+    }
+
+    document.title = site.seo.title;
+
+    const descriptionMeta = document.querySelector('meta[name="description"]');
+
+    if (descriptionMeta) {
+      descriptionMeta.setAttribute('content', site.seo.description);
+    }
+  }, [site?.seo]);
 
   return (
     <>
-      <Header />
+      {header && solutionsMenu && (
+        <Header header={header} solutionsMenu={solutionsMenu} />
+      )}
       <main>{children}</main>
       {footer && <Footer footer={footer} />}
       {isLoading && !footer && (

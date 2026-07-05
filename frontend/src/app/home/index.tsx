@@ -39,7 +39,7 @@ const HomePage = () => {
         {data && (
           <>
             <HeroBlock hero={data.hero} />
-            <TrustedClients logos={data.trustedBy.logos} />
+            <TrustedClients trustedBy={data.trustedBy} />
 
             <LazyOnVisible fallback={solutionsFallback}>
               <LazySolutionsSection solutions={data.solutions} />

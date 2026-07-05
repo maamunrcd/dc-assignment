@@ -17,7 +17,19 @@ export const fetchSiteData = async (): Promise<SiteData> => {
 
 export const fetchHomePageData = async (): Promise<HomePageData> => {
   const { data } = await publicAxiosInstance.get<HomePageData>(endpoints.HOME);
-  return data;
+
+  const [trustedBy, solutions, techStack] = await Promise.all([
+    data.trustedBy?.heading ? Promise.resolve(data.trustedBy) : fetchTrustedByData(),
+    data.solutions?.intro ? Promise.resolve(data.solutions) : fetchSolutionsData(),
+    data.techStack?.eyebrow ? Promise.resolve(data.techStack) : fetchTechStackData(),
+  ]);
+
+  return {
+    ...data,
+    trustedBy,
+    solutions,
+    techStack,
+  };
 };
 
 export const fetchHeroData = async (): Promise<HeroData> => {

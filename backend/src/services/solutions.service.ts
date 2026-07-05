@@ -6,6 +6,7 @@ export const getSolutions = () => {
 
   return {
     defaultTabId: resolveDefaultId(tabs, homeData.solutions.defaultTabId),
+    intro: homeData.solutions.intro,
     tabs,
   };
 };

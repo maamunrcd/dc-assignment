@@ -1,11 +1,11 @@
 export const queryKeys = {
-  site: ['site'] as const,
-  homePage: ['home-page'] as const,
+  site: ['site', 'v2'] as const,
+  homePage: ['home-page', 'v2'] as const,
   sections: {
-    hero: ['sections', 'hero'] as const,
-    trustedBy: ['sections', 'trusted-by'] as const,
-    solutions: ['sections', 'solutions'] as const,
-    showcase: ['sections', 'showcase'] as const,
-    techStack: ['sections', 'tech-stack'] as const,
+    hero: ['sections', 'hero', 'v2'] as const,
+    trustedBy: ['sections', 'trusted-by', 'v2'] as const,
+    solutions: ['sections', 'solutions', 'v2'] as const,
+    showcase: ['sections', 'showcase', 'v2'] as const,
+    techStack: ['sections', 'tech-stack', 'v2'] as const,
   },
 } as const;

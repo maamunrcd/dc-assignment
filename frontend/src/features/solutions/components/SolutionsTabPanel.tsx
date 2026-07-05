@@ -1,4 +1,5 @@
 import { Link } from '@/components/Atoms/Link';
+import { SolutionFeatureCard } from '@/features/solutions/components/SolutionFeatureCard';
 import type { SolutionTab } from '@/types/api';
 
 interface SolutionsTabPanelProps {
@@ -30,14 +31,7 @@ export const SolutionsTabPanel = ({ tab }: SolutionsTabPanelProps) => (
 
     <div className="col-span-12 mt-6 grid grid-cols-1 gap-4 sm:mt-[50px] sm:grid-cols-2 lg:grid-cols-3">
       {tab.features.map((feature) => (
-        <article
-          key={feature.id}
-          className="flex min-h-[280px] w-full items-center justify-center rounded-2xl border border-black/5 bg-white p-6 text-center sm:min-h-[360px] lg:h-[450px]"
-        >
-          <h4 className="text-center font-sans text-2xl font-extrabold leading-8 tracking-[-1.2px] text-[#161616] sm:text-[32px] sm:leading-9 sm:tracking-[-1.6px]">
-            {feature.title}
-          </h4>
-        </article>
+        <SolutionFeatureCard key={feature.id} feature={feature} />
       ))}
     </div>
   </div>

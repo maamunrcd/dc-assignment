@@ -14,7 +14,7 @@
       "media": {
         "backgroundImage": "/hero-banner.png",
         "mobileImageUrl": "/hero-mobile.png",
-        "playUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "playUrl": "/hero-nature.mp4",
         "alt": "MetaTech team"
       }
     },
@@ -32,12 +32,19 @@
       "media": {
         "backgroundImage": "/hero-banner.png",
         "mobileImageUrl": "/hero-mobile.png",
-        "playUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "playUrl": "/hero-nature.mp4",
         "alt": "MetaTech team"
       }
     }
   ],
   "trustedBy": {
+    "heading": {
+      "parts": [
+        { "text": "Trusted by ", "accent": true },
+        { "text": "product teams and enterprise ", "accent": false },
+        { "text": "innovators.", "accent": true }
+      ]
+    },
     "logos": [
       {
         "id": "brand-1",
@@ -91,11 +98,19 @@
   },
   "solutions": {
     "defaultTabId": "data-ai",
+    "intro": {
+      "eyebrow": "We Are />",
+      "headline": "Engineering business solutions through three strategic pillars",
+      "body": "AI powered delivery combining intelligent software engineering, data driven insight, and elite talent to accelerate scale, quality, and competitive advantage."
+    },
     "tabs": [
       {
         "id": "data-ai",
         "order": 1,
         "tabTitle": "Data + AI",
+        "menuLabel": "Data+AI First Innovation",
+        "menuImageUrl": "/menu2.png",
+        "menuHref": "#solutions",
         "number": "01",
         "title": "Data + AI Settings Innovation",
         "subtitle": "Our Data and AI services combine engineering, analytics, and applied AI to help organizations understand data, predict outcomes, and automate decisions. From trusted analytics to production grade AI systems, we deliver intelligence that works in the real world.",
@@ -104,15 +119,30 @@
           "href": "#contact"
         },
         "features": [
-          { "id": "data-integrity", "title": "Data Integrity First" },
-          { "id": "workflows", "title": "Workflows Before Automation" },
-          { "id": "governance", "title": "Governance With Same Standard" }
+          {
+            "id": "data-integrity",
+            "title": "Data Integrity First",
+            "description": "AI outputs are only as reliable as the data feeding them. We design, validate, and strengthen your data foundation from the ground up. Garbage in, garbage out is not a risk we take with your business."
+          },
+          {
+            "id": "workflows",
+            "title": "Workflows Before Automation",
+            "description": "Before we build anything, we map your business workflows end to end by surveying the ambiguity. We understand the decisions being made, the people making them, and the systems involved. That clarity determines how and where automation creates real leverage, not just activity."
+          },
+          {
+            "id": "governance",
+            "title": "Governance With Same Standard",
+            "description": "We implement data governance frameworks that carry the same accountability as human oversight. Your agents operate within defined boundaries. Auditability, control, and compliance are built in, not added on."
+          }
         ]
       },
       {
         "id": "custom-software",
         "order": 2,
         "tabTitle": "Custom Software",
+        "menuLabel": "Custom Software Development",
+        "menuImageUrl": "/menu1.png",
+        "menuHref": "#solutions",
         "number": "02",
         "title": "Custom Software Engineering",
         "subtitle": "We design and build scalable software platforms tailored to your business — from modern web applications to cloud-native systems that evolve with your product roadmap.",
@@ -121,15 +151,30 @@
           "href": "#contact"
         },
         "features": [
-          { "id": "architecture", "title": "Architecture That Scales" },
-          { "id": "delivery", "title": "Delivery With Discipline" },
-          { "id": "quality", "title": "Quality Built In" }
+          {
+            "id": "architecture",
+            "title": "Architecture That Scales",
+            "description": "We design systems that grow with your product — modular, observable, and built for change. Every architectural decision balances speed today with resilience for what comes next."
+          },
+          {
+            "id": "delivery",
+            "title": "Delivery With Discipline",
+            "description": "Predictable delivery starts with clear scope, tight feedback loops, and engineering practices that keep teams aligned. We ship incrementally without sacrificing rigor."
+          },
+          {
+            "id": "quality",
+            "title": "Quality Built In",
+            "description": "Testing, code review, and operational readiness are part of the build — not a phase at the end. Quality is how we protect velocity over the long run."
+          }
         ]
       },
       {
         "id": "tech-staffing",
         "order": 3,
         "tabTitle": "Tech Staffing",
+        "menuLabel": "Tech Staff Augmentation",
+        "menuImageUrl": "/menu3.png",
+        "menuHref": "#solutions",
         "number": "03",
         "title": "Elite Tech Staffing",
         "subtitle": "Augment your team with senior engineers, data specialists, and AI practitioners who integrate quickly and raise the bar on execution, collaboration, and outcomes.",
@@ -138,9 +183,21 @@
           "href": "#contact"
         },
         "features": [
-          { "id": "senior-talent", "title": "Senior Talent Only" },
-          { "id": "embedded", "title": "Embedded Collaboration" },
-          { "id": "outcomes", "title": "Outcome-Focused Teams" }
+          {
+            "id": "senior-talent",
+            "title": "Senior Talent Only",
+            "description": "We place experienced engineers and specialists who can contribute from day one. No bench warmers — every engagement is staffed for impact, not headcount."
+          },
+          {
+            "id": "embedded",
+            "title": "Embedded Collaboration",
+            "description": "Our people integrate into your workflows, tools, and culture. They work as an extension of your team with the same accountability and communication standards."
+          },
+          {
+            "id": "outcomes",
+            "title": "Outcome-Focused Teams",
+            "description": "Staffing succeeds when outcomes are clear. We align talent to measurable goals so augmentation drives delivery — not just capacity."
+          }
         ]
       }
     ]
@@ -186,6 +243,7 @@
     ]
   },
   "techStack": {
+    "eyebrow": "Tech Stacks />",
     "title": "Built With Modern Technologies",
     "subtitle": "We use modern, reliable technologies to design, build, and scale high-performance software systems. Our team works with proven tools to deliver secure, scalable, production-ready solutions.",
     "rows": [

@@ -1,5 +1,7 @@
-import { Link } from '@/components/Atoms/Link';
+import { useState, type CSSProperties } from 'react';
+import { VideoModal } from '@/components/Atoms/VideoModal';
 import { LazyImage } from '@/components/Atoms/LazyImage';
+import { cn } from '@/lib/utils/cn';
 import type { HeroMedia } from '@/types/api';
 
 const DESKTOP_PLAY_SIZE = 154;
@@ -11,39 +13,49 @@ interface HeroMediaBannerProps {
   media: HeroMedia;
 }
 
+interface PlayButtonProps {
+  size: number;
+  className?: string;
+  style?: CSSProperties;
+  onClick: () => void;
+}
+
+const PlayButton = ({ size, className, style, onClick }: PlayButtonProps) => (
+  <button
+    type="button"
+    onClick={onClick}
+    className={cn('transition-transform hover:scale-105', className)}
+    aria-label="Play video"
+    style={style}
+  >
+    <img src="/play.svg" alt="" width={size} height={size} />
+  </button>
+);
+
 export const HeroMediaBanner = ({ media }: HeroMediaBannerProps) => {
+  const [isVideoOpen, setIsVideoOpen] = useState(false);
   const mobileImage = media.mobileImageUrl || media.backgroundImage;
 
   return (
     <>
-      {/* Mobile: play button then image */}
       <div className="md:hidden">
-        <div className="flex justify-start md:justify-center py-6">
-          <Link
-            href={media.playUrl}
-            variant="unstyled"
-            className="transition-transform hover:scale-105"
-            aria-label="Play video"
-          >
-            <img
-              src="/play.svg"
-              alt=""
-              width={MOBILE_PLAY_SIZE}
-              height={MOBILE_PLAY_SIZE}
-            />
-          </Link>
+        <div className="flex justify-start py-6 md:justify-center">
+          <PlayButton
+            size={MOBILE_PLAY_SIZE}
+            onClick={() => setIsVideoOpen(true)}
+          />
         </div>
 
         <div className="relative overflow-hidden rounded-[26px]">
           <LazyImage
             src={mobileImage}
             alt={media.alt}
+            priority
             className="block aspect-[4/3] w-full object-cover"
           />
         </div>
       </div>
 
-      {/* Desktop: notch overlap with banner image */}
       <div
         className="relative hidden w-full md:block"
         style={{ paddingTop: DESKTOP_NOTCH_OFFSET }}
@@ -68,21 +80,20 @@ export const HeroMediaBanner = ({ media }: HeroMediaBannerProps) => {
           aria-hidden="true"
         />
 
-        <Link
-          href={media.playUrl}
-          variant="unstyled"
-          className="absolute left-1/2 z-10 -translate-x-1/2 -translate-y-1/2 transition-transform hover:scale-105"
+        <PlayButton
+          size={DESKTOP_PLAY_SIZE}
+          className="absolute left-1/2 z-10 -translate-x-1/2 -translate-y-1/2"
           style={{ top: DESKTOP_NOTCH_OFFSET }}
-          aria-label="Play video"
-        >
-          <img
-            src="/play.svg"
-            alt=""
-            width={DESKTOP_PLAY_SIZE}
-            height={DESKTOP_PLAY_SIZE}
-          />
-        </Link>
+          onClick={() => setIsVideoOpen(true)}
+        />
       </div>
+
+      <VideoModal
+        isOpen={isVideoOpen}
+        onClose={() => setIsVideoOpen(false)}
+        videoUrl={media.playUrl}
+        title={media.alt}
+      />
     </>
   );
 };

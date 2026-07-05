@@ -29,19 +29,33 @@ export interface TrustedByLogo {
   href?: string;
 }
 
+export interface HeadingPart {
+  text: string;
+  accent: boolean;
+}
+
+export interface SectionHeading {
+  parts: HeadingPart[];
+}
+
 export interface TrustedByData {
+  heading: SectionHeading;
   logos: TrustedByLogo[];
 }
 
 export interface SolutionFeature {
   id: string;
   title: string;
+  description: string;
 }
 
 export interface SolutionTab {
   id: string;
   order: number;
   tabTitle: string;
+  menuLabel: string;
+  menuImageUrl: string;
+  menuHref: string;
   number: string;
   title: string;
   subtitle: string;
@@ -49,8 +63,15 @@ export interface SolutionTab {
   features: SolutionFeature[];
 }
 
+export interface SolutionsIntro {
+  eyebrow: string;
+  headline: string;
+  body: string;
+}
+
 export interface SolutionsData {
   defaultTabId: string;
+  intro: SolutionsIntro;
   tabs: SolutionTab[];
 }
 
@@ -94,6 +115,7 @@ export interface TechStackRow {
 }
 
 export interface TechStackData {
+  eyebrow: string;
   title: string;
   subtitle: string;
   rows: TechStackRow[];
@@ -122,7 +144,40 @@ export interface FooterData {
   };
 }
 
+export interface HeaderNavLink {
+  id: string;
+  order: number;
+  label: string;
+  href: string;
+  hasMegaMenu?: boolean;
+}
+
+export interface HeaderData {
+  logo: {
+    imageUrl: string;
+    alt: string;
+    href: string;
+  };
+  navLinks: HeaderNavLink[];
+  cta: LinkCta;
+}
+
+export interface SolutionsMenuItem {
+  id: string;
+  label: string;
+  imageUrl: string;
+  href: string;
+}
+
+export interface SeoData {
+  title: string;
+  description: string;
+}
+
 export interface SiteData {
+  seo: SeoData;
+  header: HeaderData;
+  solutionsMenu: SolutionsMenuItem[];
   footer: FooterData;
 }
 

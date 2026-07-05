@@ -46,7 +46,11 @@ export const TechStackSection = ({ techStack }: TechStackSectionProps) => (
   <section className="bg-white py-16 text-primary-dark lg:py-24">
     <SectionContainer>
       <div className="grid gap-8 lg:grid-cols-[minmax(0,180px)_1fr] lg:items-start lg:gap-12 xl:gap-20">
-        <p className="text-sm font-medium text-primary-dark/80">Tech Stacks /&gt;</p>
+        {techStack.eyebrow && (
+          <p className="text-sm font-medium text-primary-dark/80">
+            {techStack.eyebrow}
+          </p>
+        )}
 
         <div className="max-w-3xl">
           <h2 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-[2.5rem] lg:leading-tight">
