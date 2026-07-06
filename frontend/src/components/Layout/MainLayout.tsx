@@ -13,7 +13,6 @@ export const MainLayout = ({ children }: MainLayoutProps) => {
   const { data: site, isLoading, isError, refetch } = useSiteQuery();
   const footer = site?.footer;
   const header = site?.header;
-  const solutionsMenu = site?.solutionsMenu;
 
   useEffect(() => {
     if (!site?.seo) {
@@ -31,9 +30,7 @@ export const MainLayout = ({ children }: MainLayoutProps) => {
 
   return (
     <>
-      {header && solutionsMenu && (
-        <Header header={header} solutionsMenu={solutionsMenu} />
-      )}
+      {header && <Header header={header} />}
       <main>{children}</main>
       {footer && <Footer footer={footer} />}
       {isLoading && !footer && (

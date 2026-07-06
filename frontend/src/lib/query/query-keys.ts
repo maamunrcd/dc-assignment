@@ -1,5 +1,5 @@
 export const queryKeys = {
-  site: ['site', 'v2'] as const,
+  site: ['site', 'v4'] as const,
   homePage: ['home-page', 'v2'] as const,
   sections: {
     hero: ['sections', 'hero', 'v2'] as const,

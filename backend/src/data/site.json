@@ -15,7 +15,7 @@
         "order": 1,
         "label": "Solutions",
         "href": "#solutions",
-        "hasMegaMenu": true
+        "childrenRef": "solutions-tabs"
       },
       {
         "id": "showcase",

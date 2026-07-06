@@ -144,12 +144,19 @@ export interface FooterData {
   };
 }
 
+export interface HeaderNavChild {
+  id: string;
+  label: string;
+  href: string;
+  imageUrl?: string;
+}
+
 export interface HeaderNavLink {
   id: string;
   order: number;
   label: string;
   href: string;
-  hasMegaMenu?: boolean;
+  children?: HeaderNavChild[];
 }
 
 export interface HeaderData {
@@ -162,13 +169,6 @@ export interface HeaderData {
   cta: LinkCta;
 }
 
-export interface SolutionsMenuItem {
-  id: string;
-  label: string;
-  imageUrl: string;
-  href: string;
-}
-
 export interface SeoData {
   title: string;
   description: string;
@@ -177,7 +177,6 @@ export interface SeoData {
 export interface SiteData {
   seo: SeoData;
   header: HeaderData;
-  solutionsMenu: SolutionsMenuItem[];
   footer: FooterData;
 }
 
